@@ -2,14 +2,21 @@ import numpy as np
 import pandas as pd
 import xlsxwriter
 import argparse
+import os
 
 # parse command line arguments
 parser = argparse.ArgumentParser(description="Generate JC bingo sheets")
-parser.add_argument("-n", type=int, default=8)
+parser.add_argument('-i', type=str)
+parser.add_argument('-n', type=int, default=8)
 parser.add_argument("-o", type=str, default="bingo_jc.xlsx")
 args = parser.parse_args()
 
-bingo = pd.read_csv('bingo_jc.csv', header=None)
+# read file
+if os.path.isfile(args.i):
+    bingo = pd.read_csv(args.i, header=None)
+else:
+    print('Input file does not exit')
+    exit()
 
 writer = pd.ExcelWriter(path=args.o, engine='xlsxwriter')
 workbook = writer.book
