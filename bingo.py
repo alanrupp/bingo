@@ -5,10 +5,10 @@ import argparse
 import os
 
 # parse command line arguments
-parser = argparse.ArgumentParser(description="Generate JC bingo sheets")
+parser = argparse.ArgumentParser(description="Generate bingo sheets")
 parser.add_argument('-i', type=str)
 parser.add_argument('-n', type=int, default=8)
-parser.add_argument("-o", type=str, default="bingo_jc.xlsx")
+parser.add_argument("-o", type=str, default="bingo.xlsx")
 args = parser.parse_args()
 
 # read file
@@ -25,7 +25,7 @@ cell_format = workbook.add_format({'text_wrap': True,\
                                    'valign': 'vcenter',\
                                    'border': 1,\
                                    'font_name': 'Arial'})
-# make 8 copies
+# make n copies as distinct workbook sheets
 for cycle in range(args.n):
     # shuffle the input values
     np.random.shuffle(bingo[0])
